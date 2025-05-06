@@ -275,7 +275,7 @@
     <div id="particles-js"></div>
     <div class="menu">
       <div class="menu-title">
-        AUXILIO BY @NEXUS.SENSIX
+        AUXILIO BY @SIELZADA
       </div>
       <div class="tabs">
         <button class="tab active" onclick="showTab('aimbot')">Aimbot</button>
@@ -363,7 +363,6 @@
       });
 
       // Variável para verificar se o app foi aberto
-      let appOpened = false;
       let functionsInjected = false;
       
       function showTab(tab) {
@@ -443,43 +442,10 @@
         
         updateStatus("Injetando funções...");
         
-        // Verifica se é mobile
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        if (!isMobile) {
-          enableAllFunctions();
-          return;
-        }
-
-        // Simula o processo de injeção
+        // Simula o processo de injeção sem tentar abrir nenhuma página
         setTimeout(() => {
           enableAllFunctions();
-          
-          // Tenta abrir o Free Fire
-          try {
-            // Versões alternativas do Free Fire
-            const freefireSchemes = [
-              'freefire://',
-              'freefireth://',
-              'ffbra://',
-              'com.dts.freefireth',
-              'com.dts.freefireth.az'
-            ];
-            
-            // Tenta abrir com cada scheme
-            for (let scheme of freefireSchemes) {
-              window.location.href = scheme;
-            }
-            
-            // Monitora se o app foi aberto
-            window.onblur = function() {
-              appOpened = true;
-            };
-            
-          } catch (e) {
-            console.log("Erro ao abrir Free Fire:", e);
-          }
-        }, 1000);
+        }, 500);
       }
 
       // Inicialização
