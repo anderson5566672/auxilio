@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>AUXILIO BY @NEXUS.SENSIX</title>
+    <style>
+      body {
+        background: #0a0a0a;
+        color: white;
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      
+      .menu {
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 12px;
+        padding: 15px;
+        margin: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        max-width: 450px;
+        width: 100%;
+        backdrop-filter: blur(5px);
+      }
+      
+      .menu-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+      
+      .tabs {
+        display: flex;
+        margin-bottom: 10px;
+        gap: 5px;
+      }
+      
+      .tab {
+        flex: 1;
+        padding: 8px;
+        background: #242424;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+      
+      .tab.active {
+        background: #555;
+        transform: scale(1.02);
+      }
+      
+      .checkbox {
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        user-select: none;
+      }
+      
+      .checkbox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      
+      .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #242424;
+        border-radius: 4px;
+        transition: all 0.3s;
+      }
+      
+      .checkbox:hover .checkmark {
+        background-color: #444;
+      }
+      
+      .checkbox input:checked ~ .checkmark {
+        background-color: #fff;
+      }
+      
+      .checkmark:after {
+        content: "✓";
+        position: absolute;
+        display: none;
+        color: #000;
+        left: 4px;
+        top: -2px;
+      }
+      
+      .checkbox input:checked ~ .checkmark:after {
+        display: block;
+      }
+      
+      .separator {
+        height: 1px;
+        background: #444;
+        margin: 15px 0;
+      }
+      
+      .slider-container {
+        margin-bottom: 15px;
+      }
+      
+      .slider {
+        width: 100%;
+        height: 8px;
+        -webkit-appearance: none;
+        background: #242424;
+        outline: none;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        transition: all 0.3s;
+      }
+      
+      .slider:hover {
+        background: #444;
+      }
+      
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #fff;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+      
+      .slider::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+      }
+      
+      .combobox {
+        width: 100%;
+        padding: 8px;
+        background: #242424;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        transition: all 0.3s;
+      }
+      
+      .combobox:hover {
+        background: #444;
+      }
+      
+      .radio-group {
+        margin-top: 10px;
+      }
+      
+      .radio {
+        display: block;
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        user-select: none;
+      }
+      
+      .radio input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+      
+      .radio-mark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #242424;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+      
+      .radio:hover .radio-mark {
+        background-color: #444;
+      }
+      
+      .radio input:checked ~ .radio-mark {
+        background-color: #fff;
+      }
+      
+      .radio-mark:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      
+      .radio input:checked ~ .radio-mark:after {
+        display: block;
+      }
+      
+      .radio .radio-mark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #000;
+      }
+      
+      #injectButton {
+        width: 100%;
+        padding: 15px;
+        background-color: #fff;
+        color: #000;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 15px;
+        transition: all 0.3s;
+      }
+      
+      #injectButton:hover {
+        background-color: #eee;
+        transform: scale(1.02);
+      }
+      
+      #infoTab {
+        text-align: left;
+      }
+      
+      .status {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+        color: #fff;
+      }
+      
+      .developer-link {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      
+      .developer-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="menu">
+      <div class="menu-title">
+        AUXILIO BY @SIELZADA
+      </div>
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('aimbot')">Aimbot</button>
+        <button class="tab" onclick="showTab('info')">Info</button>
+      </div>
+      <div class="content" id="content">
+        <div id="aimbotTab">
+          <label class="checkbox">
+            <input type="checkbox" id="enableAimbot" />
+            <span class="checkmark"></span>
+            Ativar Auxílio
+          </label>
+          <label class="checkbox">
+            <input type="checkbox" id="enablePrecision" />
+            <span class="checkmark"></span>
+            Ativar Precisão
+          </label>
+          <div class="separator"></div>
+          <div class="slider-container">
+            <input
+              type="range"
+              min="0"
+              max="10"
+              value="0"
+              step="1"
+              class="slider"
+              id="fovSlider"
+              oninput="updateSliderValue(this.value)"
+            />
+            <span>Precisão <span id="fovValue">0</span></span>
+          </div>
+          <select class="combobox" id="aimbotMode">
+            <option>Auxilio Head</option>
+            <option>Auxilio Recoil</option>
+            <option>Auxilio Sensi</option>
+          </select>
+          <div class="separator"></div>
+          <span>Tipo de Aimbot:</span>
+          <div class="radio-group">
+            <label class="radio">
+              <input type="radio" name="aimbotType" id="aimOnShoot" />
+              <span class="radio-mark"></span>
+              Ao Atirar
+            </label>
+            <label class="radio">
+              <input type="radio" name="aimbotType" id="aimOnLook" />
+              <span class="radio-mark"></span>
+              Ao Olhar
+            </label>
+          </div>
+        </div>
+        <div id="infoTab" style="display: none;">
+          <p><strong>Desenvolvido por:</strong> <a href="https://www.instagram.com/nexus.sensix" class="developer-link" target="_blank">@NEXUS.SENSIX</a></p>
+          <hr />
+          <p><strong>Dicas:</strong> Ative Funções no Treinamento.</p>
+          <p><strong>Versão:</strong> 1.0.0</p>
+        </div>
+      </div>
+      <button id="injectButton" onclick="injectFunctions()">
+        INJETAR FUNÇÕES NO JOGO
+      </button>
+      <div class="status" id="statusText"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Inicializa as partículas
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+          move: { enable: true, speed: 2, direction: "none", random: true, straight: false, out_mode: "out" }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "repulse" },
+            onclick: { enable: true, mode: "push" }
+          }
+        }
+      });
+
+      // Variável para verificar se o app foi aberto
+      let appOpened = false;
+      let functionsInjected = false;
+      
+      function showTab(tab) {
+        document.getElementById("aimbotTab").style.display = tab === "aimbot" ? "block" : "none";
+        document.getElementById("infoTab").style.display = tab === "info" ? "block" : "none";
+        
+        let tabs = document.querySelectorAll(".tab");
+        tabs.forEach((button) => button.classList.remove("active"));
+        event.currentTarget.classList.add("active");
+      }
+
+      function updateSliderValue(value) {
+        document.getElementById("fovValue").innerText = value;
+      }
+
+      function updateStatus(text) {
+        document.getElementById("statusText").innerText = text;
+        if (text) {
+          setTimeout(() => {
+            document.getElementById("statusText").innerText = "";
+          }, 3000);
+        }
+      }
+
+      function resetAllFunctions() {
+        // Desmarca todos os checkboxes
+        document.getElementById("enableAimbot").checked = false;
+        document.getElementById("enablePrecision").checked = false;
+        
+        // Reseta o slider
+        document.getElementById("fovSlider").value = 0;
+        updateSliderValue(0);
+        
+        // Reseta o combobox
+        document.getElementById("aimbotMode").selectedIndex = 0;
+        
+        // Reseta os radios
+        document.getElementById("aimOnShoot").checked = false;
+        document.getElementById("aimOnLook").checked = false;
+        
+        functionsInjected = false;
+        document.getElementById("injectButton").innerText = "INJETAR FUNÇÕES NO JOGO";
+      }
+
+      function enableAllFunctions() {
+        // Mantém o valor atual do slider
+        const currentPrecision = document.getElementById("fovSlider").value;
+        
+        // Marca todos os checkboxes
+        document.getElementById("enableAimbot").checked = true;
+        document.getElementById("enablePrecision").checked = true;
+        
+        // Mantém o valor do slider selecionado pelo usuário
+        updateSliderValue(currentPrecision);
+        
+        // Mantém a seleção do combobox
+        const currentMode = document.getElementById("aimbotMode").selectedIndex;
+        
+        // Marca o radio selecionado
+        if(document.getElementById("aimOnShoot").checked) {
+          document.getElementById("aimOnShoot").checked = true;
+        } else {
+          document.getElementById("aimOnLook").checked = true;
+        }
+        
+        functionsInjected = true;
+        document.getElementById("injectButton").innerText = "REMOVER FUNÇÕES";
+        updateStatus("Injetado com sucesso!");
+      }
+
+      function injectFunctions() {
+        if (functionsInjected) {
+          resetAllFunctions();
+          updateStatus("Funções removidas com sucesso!");
+          return;
+        }
+        
+        updateStatus("Injetando funções...");
+        
+        // Verifica se é mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (!isMobile) {
+          enableAllFunctions();
+          return;
+        }
+
+        // Simula o processo de injeção
+        setTimeout(() => {
+          enableAllFunctions();
+          
+          // Tenta abrir o Free Fire
+          try {
+            // Versões alternativas do Free Fire
+            const freefireSchemes = [
+              'freefire://',
+              'freefireth://',
+              'ffbra://',
+              'com.dts.freefireth',
+              'com.dts.freefireth.az'
+            ];
+            
+            // Tenta abrir com cada scheme
+            for (let scheme of freefireSchemes) {
+              window.location.href = scheme;
+            }
+            
+            // Monitora se o app foi aberto
+            window.onblur = function() {
+              appOpened = true;
+            };
+            
+          } catch (e) {
+            console.log("Erro ao abrir Free Fire:", e);
+          }
+        }, 1000);
+      }
+
+      // Inicialização
+      document.addEventListener('DOMContentLoaded', function() {
+        // Inicia com todas funções desmarcadas e sem mensagem
+        resetAllFunctions();
+        updateStatus("");
+        
+        // Adiciona efeito de clique nos botões
+        const buttons = document.querySelectorAll('button, .checkbox, .radio');
+        buttons.forEach(button => {
+          button.addEventListener('mousedown', () => {
+            button.style.transform = 'scale(0.98)';
+          });
+          button.addEventListener('mouseup', () => {
+            button.style.transform = '';
+          });
+          button.addEventListener('mouseleave', () => {
+            button.style.transform = '';
+          });
+        });
+      });
+    </script>
+</body>
+</html>
